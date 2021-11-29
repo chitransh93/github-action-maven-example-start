@@ -47,5 +47,11 @@ jobs:
           with:
             name: Package
             path: staging
-      
-      
+ #publish-job:
+ #To publish the artifacts back to the action run.
+ #    needs: [build_and_test] :: 
+ #       will run only if build_and_test job is a success.
+ #    mvn -B package --file pom.xml -DskipTests :: 
+ #      -DskipTests is passed because we dont want to test again.
+ #    actions/upload-artifact@v1
+ #       used to deploy all .jar files in staging folder to action(in Package)
