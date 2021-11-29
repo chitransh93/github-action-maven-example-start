@@ -1,3 +1,4 @@
+
 name: Maven CI/CD
 
 on:
@@ -17,6 +18,17 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 14
+
+    - name: Cache the maven packages to reduce time taken.
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml')}}
+        restore-keys: ${{ os.runner }}-m2
+     #This action is for caching dependencies.
+     #cache found: fetched and stored in path
+     #restore-keys: cache miss- try to find in path povided in restore-keys.
+     #cache miss: download cache and store in path.
 
     - name: Build project with Maven
       run: mvn -B package --file pom.xml
