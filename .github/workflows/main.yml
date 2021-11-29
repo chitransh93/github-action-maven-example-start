@@ -24,7 +24,7 @@ jobs:
       with:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml')}}
-        restore-keys: ${{ os.runner }}-m2
+        restore-keys: ${{ runner.os }}-m2
      #This action is for caching dependencies.
      #cache found: fetched and stored in path
      #restore-keys: cache miss- try to find in path povided in restore-keys.
