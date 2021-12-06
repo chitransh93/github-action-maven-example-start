@@ -55,3 +55,15 @@ jobs:
  #      -DskipTests is passed because we dont want to test again.
  #    actions/upload-artifact@v1
  #       used to deploy all .jar files in staging folder to action(in Package)
+  build-docker-image:
+    name: Publish to Docker Hub
+    runs-on: ubuntu-latest
+    needs: [build_and_test]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Container image
+        run: docker build -t ${{ secrets.DOCKER_REPO }}:v1.0.0 .
+      - name: Publish Docker image
+        run: docker push ${{ secrets.DOCKER_REPO }}
